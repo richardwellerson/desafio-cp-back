@@ -12,7 +12,6 @@ CREATE TABLE books(
   price_discount FLOAT NOT NULL,
   stars FLOAT NOT NULL,
   review VARCHAR(30) NOT NULL,
-  FOREIGN KEY(author_id) REFERENCES author(id),
   PRIMARY KEY(id)
 );
 
