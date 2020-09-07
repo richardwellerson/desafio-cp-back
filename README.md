@@ -1,92 +1,133 @@
-![Logo](http://cafeepixel.com.br/assinaturas/logo_color_git.png)
-# Desafio CP - Backend
+# BooksAPI - BackEnd
 
-A **Café e Pixel** é uma empresa que oferece diversos serviços, desde consultoria de software ao desenvolvimento completo de uma aplicação robusta.
+Neste repositório há uma API de livros que realiza um CRUD completo.
 
-Nossos desenvolvedores buscam estar sempre em aprendizado contínuo, pois amam o que fazem. Nossos processos de desenvolvimento ágil e nossa busca por melhores práticas de desenvolvimento nos proporcionam um ótimo ambiente para profissionais que gostam de criar softwares de qualidade em boa companhia.
+## Instalação Local
 
-Estamos sempre procurando por profissionais que gostam de otimizar seu trabalho, por isso damos preferência a times pequenos com profissionais qualificados, ao invés de times grandes com profissionais medianos.
+Para utilizá-la localmente, veja o passo a passo:
 
-Este repositório contém um problema usado para avaliar as skills do candidato. É importante ressaltar que resolver o desafio de forma satisfatória é apenas parte do que será avaliado. Nós consideramos disciplinas como documentação, testing, linha do tempo dos commits, tempo de entrega e melhores práticas de design e desenvolvimento.
+1. Clone o repositório
+2. Execute a Seed do banco que está na raiz do projeto no seu banco de dados
+3. Instale as dependências:
+  - npm install
+4. Crie um arquivo com o nome `.env` na raiz do projeto com a seguinte estrutura:
+  - PORT=[Porta onde a API ficará disponível, geralmente se usa a porta 3000]
+  - PASSWORD=[Senha do seu banco de dados]
+  - DBUSER=[Usuário do seu banco de dados, geralmente se é utilizado root]
+  - HOST=[Endereço que será disponibilizado juntamente com a porta, geralmente utilizado como localhost]
+  - DBPORT=[Porta onde o acesso ao banco de dados está disponível, geralmente utilizada a porta 33060]
+  
+Observação: Os colchetes não são necessários. O arquivo `.env` não diferencia type, então não há necessidade. Apenas insira os dados logo após o sinal de igual, sem espaços.
 
-### Dicas
-
-- Leia cuidadosamente as especificações. Se não compreender algo, sinta-se livre para falar com a gente;
-- Observe as recomendações e materiais de referência;
-- Apreciamos a simplicidade, então defina bem o setup do projeto para nos auxiliar na sua avaliação;
-- Se possível faça testes, eles fazem do mundo um lugar melhor :D
-
-## Como participar
-
-1. Faça um fork desse repositório no github e adicione permissão de leitura para **todos** os usuários abaixo:
-- [Marcelo](https://github.com/marcelomoreles)
-- [Édipo](http://github.com/shuhikari)
-- [Jailton](https://github.com/jlandim)
-- [Manoel](https://github.com/Manogel)
-
-2. Siga as instruções do README.md (este arquivo);
-3. Faça o deploy do seu projeto em algum serviço de hospedagem (Heroku, Firebase, Netlify, etc);
-4. Ao finalizar uma das entregas, abra **um pull request nesse repositório para cada etapa das entregas** com o título da mesma;
-5. Códigos plagiados serão desclassificados;
-5. Não se preocupe com o PR sendo rejeitado, usaremos ele como referência, mas não podemos fazer o merge para não comprometer a resposta de outros candidatos.
-
-## Prazo para entrega
-O projeto deverá ser entregue até 20:00 de domingo (06/09).
-
-# Especificações - Backend
-
-Você deve implementar um CRUD básico de uma loja de livros.
-
-O principal objetivo desse desafio é **disponibilizar uma REST API atendendo aos seguintes requerimentos:**
+5. Execute o projeto
+  - npm start
+6. Ele ficará disponível no link `http://[HOST]:[PORT]`.
 
 
-### 1. Histórias
-1. O usuário pode adicionar um livro
-2. O usuário pode listar os livros cadastrados
-3. O usuário pode deletar os livros cadastrados
-4. O usuário pode buscar os livros pelo título
+--- 
+## EndPoints
 
-### 2. Definições
-**Livro**
-- Título
-- Autor
-- Sinopse
-- Preço
-- Imagem de capa
-- Avaliação
+#### GET http://localhost:[PORT]/books (Reúne todos os livros do banco)
 
+###### Response
+```
+{
+    "message": "success",
+    "books": [
+        {
+            "id": 1,
+            "name": "Kevin Kwan",
+            "title": "Crazy rich asians",
+            "description": "the outrageously funny debut novel about... ",
+            "imageUrl": "https://m.media-amazon.com/images/I/41Phm14P9IL.jpg",
+            "price": 24.1200008392334,
+            "priceDiscount": 14.989999771118164,
+            "stars": 4,
+            "review": "252 review"
+        },
+        ...
+    ]
+}
+```
+---
+#### POST http://localhost:[PORT]/books (Insere um Livro)
 
-### 3. Requerimentos do projeto
+###### Request
 
-- Deixar a aplicação disponível online (Heroku, Firebase, ou outro de sua preferência);
-- A aplicação deve ser escrita usando `nodejs`;
-- Escreva no readme do seu projeto uma breve documentação de como rodá-lo localmente;
-- Forneça a documentação da sua API;
-- O sistema de autenticação é opcional, mas caso seja feito, insira os detalhes de login no readme;
-- A API deve retornar um json com os dados solicitados, bem como as respostas de status de sucesso e erro, caso houverem;
-- **Todos os commits deverão estar em inglês**;
-- **O nome das variáveis internas, funções e métodos da API deve ser escritas em inglês**.
+```
+{
+  "name": "Kevin Kwan",
+  "title": "Crazy rich asians",
+  "description": "the outrageously funny ...the gossip...",
+  "imageUrl": "https://m.media-amazon.com/images/I/41Phm14P9IL.jpg",
+  "price": 24.12,
+  "priceDiscount": 14.15,
+  "stars": 4,
+  "review": "252 review"
+}
+```
 
-
-# Recomendações
-
-- Escreva testes;
-- Use boas práticas de programação;
-- Utilize os princípios [SOLID](https://en.wikipedia.org/wiki/SOLID);
-- Não se esqueça de ler com atenção aos requerimentos, cada detalhe conta :wink:.
-
-
+###### Response
+```
+{
+  "status": "success",
+  "insertedBook": {
+    "id": 1,
+    "name": "Kevin Kwan",
+    "title": "Crazy rich asians",
+    "description": "the outrageously funny ...the gossip...",
+    "imageUrl": "https://m.media-amazon.com/images/I/41Phm14P9IL.jpg",
+    "price": 24.12,
+    "priceDiscount": 14.15,
+    "stars": 4,
+    "review": "252 review"
+  }
+}
+```
 ---
 
-# ❗❗❗ Para os candidatos à vaga de Fullstack ❗❗❗
+### DELETE http://localhost:[PORT]/books (Apaga um Livro pelo título)
 
-Caso você esteja concorrendo à vaga de fullstack, **faça a integração da sua API com o desafio de frontend na listagem de livros.**
+###### Request
+```
+{
+  "title": "Crazy rich asians"
+}
 
-O fluxo de adicionar o livro ao carrinho será controlado localmente.
+```
 
+###### Response
+```
+{
+  "message": "successfully deleted",
+  "bookTitle": "Crazy rich asians"
+}
+```
 
-[Desafio de Frontend](https://github.com/cafeepixel/desafio-cp-front)
+### POST http://localhost:[PORT]/books/search (Busca um livro pelo título)
 
+###### Request
 
+```
+{
+  "title": "Educated"
+}
+```
 
-
+###### Response
+```
+{
+  "message": "success",
+  "book": {
+    "id": 4,
+    "name": "Tara Westover",
+    "title": "Educated",
+    "description": "It is a tale of fierce family loyalty and of the grief that comes with severing the closest of ties. With...",
+    "imageUrl": "https://miro.medium.com/max/4922/1*Yd4GVE9k8_AIjlki6Z38eA@2x.jpeg",
+    "price": 34.20000076293945,
+    "priceDiscount": 12.680000305175781,
+    "stars": 4.199999809265137,
+    "review": "364 review"
+  }
+}
+```
